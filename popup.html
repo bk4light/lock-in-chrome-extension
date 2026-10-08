@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 280px;
+      padding: 16px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #FDF6F0;
+      color: #4A3E3D;
+      margin: 0;
+    }
+    h2 { margin-top: 0; font-size: 18px; text-align: center; color: #4A3E3D; }
+    label { font-size: 11px; font-weight: bold; color: #6D5D5D; display: block; margin-top: 10px; }
+    input, select {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      border: 1px solid #E0D0C1;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 12px;
+    }
+    .url-input-group { display: flex; gap: 6px; margin-top: 4px; }
+    .add-btn { background-color: #E8D5C4; border: none; border-radius: 6px; padding: 6px 10px; font-weight: bold; cursor: pointer; }
+    .url-list {
+      max-height: 70px;
+      overflow-y: auto;
+      background: #FFF;
+      border: 1px solid #E0D0C1;
+      border-radius: 6px;
+      padding: 6px;
+      margin-top: 6px;
+      font-size: 11px;
+    }
+    .url-item { display: flex; justify-content: space-between; margin-bottom: 4px; word-break: break-all; }
+    .remove-link { color: #A85555; cursor: pointer; font-weight: bold; margin-left: 6px; }
+    #timerDisplay { font-size: 32px; font-weight: bold; text-align: center; color: #887070; margin: 12px 0 6px 0; }
+    .btn {
+      width: 100%;
+      border: none;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .start-btn { background-color: #C1E1C1; color: #2E4A2E; }
+    .exit-btn { background-color: #FAD2E1; color: #722F37; }
+    .status-text { font-size: 11px; text-align: center; color: #7E6B6B; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h2>🔒 Lock In Zone</h2>
+
+  <div id="setupSection">
+    <label>Add URLs / Paths to Block:</label>
+    <div class="url-input-group">
+      <input type="text" id="urlInput" placeholder="e.g. instagram.com or youtube.com/shorts">
+      <button class="add-btn" id="addUrlBtn">Add</button>
+    </div>
+    
+    <div class="url-list" id="urlList"></div>
+
+    <label>Timer Mode:</label>
+    <select id="timerMode">
+      <option value="noTimer">No Timer (Exit Whenever)</option>
+      <option value="regular">Regular Timer</option>
+      <option value="pomodoro">Pomodoro (Work / Rest)</option>
+    </select>
+
+    <div id="regularTimerConfig" style="display: none;">
+      <label>Focus Duration (Minutes):</label>
+      <input type="number" id="regularMinutes" value="25" min="1">
+    </div>
+
+    <div id="pomodoroConfig" style="display: none;">
+      <label>Work Duration (Minutes):</label>
+      <input type="number" id="pomoWork" value="25" min="1">
+      <label>Rest Duration (Minutes):</label>
+      <input type="number" id="pomoRest" value="5" min="1">
+      <label>Total Cycles / Sessions:</label>
+      <input type="number" id="pomoCycles" value="3" min="1">
+    </div>
+
+    <button class="btn start-btn" id="startBtn">🚀 Start Lock In</button>
+  </div>
+
+  <div id="activeSection" style="display: none;">
+    <div id="timerDisplay">00:00</div>
+    <div class="status-text" id="statusLabel">Focus Active</div>
+    <button class="btn exit-btn" id="exitBtn">🔓 Exit Session</button>
+  </div>
+
+  <div class="status-text" id="statusMsg"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
